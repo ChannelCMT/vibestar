@@ -13,8 +13,10 @@
 }
 
 .VPHome .VPHero {
-  min-height: calc(100vh - var(--vp-nav-height));
-  padding: 68px 24px 72px;
+  min-height: 560px;
+  padding: 40px 24px 48px;
+  display: flex;
+  align-items: center;
 }
 
 .VPHome .VPHero .container {
@@ -41,7 +43,7 @@
 .VPHome .VPHero .name {
   display: block;
   width: 100%;
-  padding: 14px 0 18px;
+  padding: 8px 0 12px;
   font-family: "Segoe Script", "Comic Sans MS", "Brush Script MT", cursive;
   font-size: clamp(64px, 9vw, 112px);
   line-height: 1.08;
@@ -51,7 +53,7 @@
 
 .VPHome .VPHero .text {
   width: 100%;
-  margin: 18px auto 0;
+  margin: 12px auto 0;
   color: #4b5563;
   font-size: clamp(22px, 3vw, 34px);
   line-height: 1.35;
@@ -64,7 +66,7 @@
 }
 
 .VPHome .VPHero .tagline {
-  margin-top: 28px;
+  margin-top: 22px;
   color: #6b7280;
   font-size: clamp(18px, 2vw, 24px);
   line-height: 1.6;
@@ -73,7 +75,7 @@
 
 .VPHome .VPHero .actions {
   justify-content: center;
-  padding-top: 42px;
+  padding-top: 30px;
 }
 
 .VPHome .VPHero .action .VPButton {
@@ -638,8 +640,8 @@
 
 @media (max-width: 800px) {
   .VPHome .VPHero {
-    min-height: 760px;
-    padding-top: 48px;
+    min-height: 560px;
+    padding-top: 36px;
   }
 
   .VPHome .VPHero .name {
