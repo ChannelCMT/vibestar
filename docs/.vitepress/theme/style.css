@@ -526,6 +526,113 @@
   line-height: 1.75;
 }
 
+.industry-hero {
+  margin: 28px 0 44px;
+  padding: 34px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 85% 8%, rgba(246, 195, 67, 0.22), transparent 28%),
+    linear-gradient(135deg, rgba(8, 119, 255, 0.14), rgba(8, 119, 255, 0.02)),
+    var(--vp-c-bg-soft);
+}
+
+.industry-hero p {
+  margin: 0 0 10px;
+  color: var(--vp-c-brand-1);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.industry-hero h2 {
+  margin: 0 0 18px;
+  border: 0;
+  padding: 0;
+  font-size: 34px;
+  line-height: 1.22;
+  letter-spacing: 0;
+}
+
+.industry-hero span {
+  color: var(--vp-c-text-2);
+  font-weight: 800;
+}
+
+.industry-tasks,
+.workflow-grid,
+.industry-process,
+.industry-outcomes {
+  display: grid;
+  gap: 16px;
+  margin: 24px 0 44px;
+}
+
+.industry-tasks,
+.workflow-grid,
+.industry-outcomes {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.industry-process {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.industry-tasks article,
+.workflow-grid article,
+.industry-process div,
+.industry-outcomes div {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+}
+
+.industry-tasks article,
+.workflow-grid article,
+.industry-process div,
+.industry-outcomes div {
+  padding: 24px;
+}
+
+.workflow-grid strong,
+.industry-process span {
+  display: inline-flex;
+  margin-bottom: 18px;
+  color: var(--vp-c-brand-1);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.industry-tasks h3,
+.workflow-grid h3,
+.industry-process h3,
+.industry-outcomes h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.industry-tasks p,
+.workflow-grid p,
+.industry-process p,
+.industry-outcomes p {
+  margin: 0;
+  color: var(--vp-c-text-2);
+  line-height: 1.75;
+}
+
+.workflow-grid ul {
+  margin: 18px 0 0;
+  padding-left: 18px;
+}
+
+.workflow-grid li {
+  margin: 8px 0;
+  color: var(--vp-c-text-2);
+}
+
 .lm-hero {
   margin: 30px 0 44px;
   padding: 34px;
@@ -663,7 +770,11 @@
   .lm-hero div,
   .lm-map,
   .lm-outcomes,
-  .tool-steps {
+  .tool-steps,
+  .industry-tasks,
+  .workflow-grid,
+  .industry-process,
+  .industry-outcomes {
     grid-template-columns: 1fr;
   }
 
@@ -684,6 +795,10 @@
   }
 
   .tool-hero h2 {
+    font-size: 28px;
+  }
+
+  .industry-hero h2 {
     font-size: 28px;
   }
 
