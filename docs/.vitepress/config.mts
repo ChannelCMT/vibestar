@@ -17,6 +17,17 @@ export default defineConfig({
       { text: '课程模块', link: '/curriculum/' }
     ],
     sidebar: {
+      '/vibe-coding-tools/': [
+        {
+          text: '工具跑通',
+          items: [
+            { text: '安装教程', link: '/vibe-coding-tools/#_1-安装教程' },
+            { text: '认知导入', link: '/vibe-coding-tools/#_2-认知导入-为什么-ai-学习必须学会环境和-cli' },
+            { text: 'Windows 命令行入门', link: '/vibe-coding-tools/#_3-windows-命令行入门' },
+            { text: 'Mac 命令行入门', link: '/vibe-coding-tools/#_4-mac-命令行入门' }
+          ]
+        }
+      ],
       '/industries/': [
         {
           text: '行业场景',
