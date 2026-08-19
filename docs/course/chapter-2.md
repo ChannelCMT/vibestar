@@ -9,7 +9,7 @@
 
 ## 本章学完能做什么
 
-你能把“我想做个 AI 员工”变成一个可讨论的任务合同，并知道什么时候只需要强模型对话，什么时候需要 Plan & Execute、路由、并行或评估循环。
+你能把“我想做个 AI 员工”变成一个可讨论的任务合同，并知道什么时候停在单 Agent，什么时候升级为 ReAct、Plan & Execute、Route + Skill、Blackboard 或 Graph Workflow。
 
 ## 痛点：把所有任务都交给一个聊天框
 
@@ -17,18 +17,18 @@
 
 ## 讲师演示：7 种架构不是菜单，而是升级阶梯
 
-从 Anthropic 的有效 Agent 工作流出发，按复杂度逐步理解：
+这七种是本课程采用的 Agent 架构演进线。它不是“越往后越先进”的菜单，而是根据任务是否需要行动、规划、分工、共享状态和固定流程逐步升级：
 
 <table class="metric-table">
   <thead><tr><th>架构</th><th>适用信号</th><th>此课的关键判断</th></tr></thead>
   <tbody>
-    <tr><td>Augmented LLM</td><td>单次任务，需要资料、工具或记忆辅助</td><td>先把输入与输出说清楚。</td></tr>
-    <tr><td>Prompt Chaining</td><td>步骤有固定先后</td><td>上一步输出必须能被下一步检查。</td></tr>
-    <tr><td>Routing</td><td>不同类型任务应走不同路径</td><td>分类规则要明确，不让模型随意猜路由。</td></tr>
-    <tr><td>Parallelization</td><td>多份独立证据可并行</td><td>并行不是答案变多，而是证据覆盖变广。</td></tr>
-    <tr><td>Orchestrator-workers</td><td>任务可拆角色、再汇总</td><td>协调者必须知道何时停止拆分。</td></tr>
-    <tr><td>Evaluator-optimizer</td><td>质量能被标准化验收</td><td>先写评分标准，再让系统迭代。</td></tr>
-    <tr><td>Autonomous Agent</td><td>长期、多步、可观察的执行</td><td>只有在权限、成本与停机点明确后才进入。</td></tr>
+    <tr><td>01｜单 Agent</td><td>单一任务、单一责任人、结果可直接验收</td><td>先把输入、输出和人工批准写清楚；不要为了“像 Agent”而加复杂度。</td></tr>
+    <tr><td>02｜ReAct</td><td>需要“观察 → 推理 → 调用工具 → 再观察”的即时循环</td><td>给它少而清晰的工具；每一步动作都要能看到结果并可停止。</td></tr>
+    <tr><td>03｜Plan and Execute</td><td>任务多步骤、目标明确，先规划能减少返工</td><td>计划与执行分开；允许根据新证据改计划，但不要让执行偏离目标。</td></tr>
+    <tr><td>04｜Multi-Agent</td><td>确实需要不同专业视角、独立证据或并行分析</td><td>先从 2–4 个角色开始；每个角色只对一种输入和输出负责。</td></tr>
+    <tr><td>05｜Route + Skill</td><td>任务来源或类型不同，且每类有稳定、可复用的方法</td><td>先定路由条件，再给每类任务匹配 Skill；不能让 Agent 随意选路或乱加载能力。</td></tr>
+    <tr><td>06｜Blackboard</td><td>多个 Agent 要围绕同一份持续更新的事实、假设和任务状态协作</td><td>定义唯一事实板、字段格式和写入权限；避免各角色各自保存一套“真相”。</td></tr>
+    <tr><td>07｜Graph Workflow</td><td>流程节点、条件分支、重试与人工批准需要长期稳定复用</td><td>把节点、边、状态和停止条件画清楚；Graph 是可审计的业务流程，不是无限自主循环。</td></tr>
   </tbody>
 </table>
 

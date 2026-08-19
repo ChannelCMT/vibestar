@@ -31,7 +31,7 @@
 <div class="route-timeline">
   <article><strong>WEEK 01</strong><div><h3>做一次机会审计</h3><p>列出团队近两周反复出现的工作，按「频率 × 标准化程度 × 可验收性 × 风险」打分。只选第一名；不要从“做一个万能 AI 助手”开始。</p></div></article>
   <article><strong>WEEK 02</strong><div><h3>把岗位写成一页合同</h3><p>写清岗位名称、输入、输出、不能做什么、谁批准、失败如何处理。输出必须是一份文件、表格、报告或可检查的下一步，而不是一句“看起来不错”的回答。</p></div></article>
-  <article><strong>WEEK 03</strong><div><h3>选择最小架构</h3><p>优先使用单 Agent 或 Prompt Chaining。只有不同类型的任务需要不同处理时才加入 Routing；此时不做并行、多 Agent 或自动执行。</p></div></article>
+  <article><strong>WEEK 03</strong><div><h3>选择最小架构</h3><p>优先使用单 Agent；只有需要边观察边调用工具时才升级 ReAct，需要稳定多步骤时才使用 Plan and Execute。此时不做多 Agent 或自动执行。</p></div></article>
   <article><strong>WEEK 04</strong><div><h3>做第一次老板验收</h3><p>用 5 个真实样本运行。记录节省时间、交付数量或返工率中的一个指标，判断：保留、调整，或停止。</p></div></article>
 </div>
 
@@ -39,7 +39,7 @@
   <thead><tr><th>本阶段应学概念</th><th>翻译成老板动作</th><th>必须留下的证据</th></tr></thead>
   <tbody>
     <tr><td>Tool vs. Teammate</td><td>判断它是一次性辅助，还是需要稳定岗位责任。</td><td><code>01-机会审计.xlsx</code></td></tr>
-    <tr><td>Prompt Chaining / Routing</td><td>先拆步骤；只有任务分类不同才做分流。</td><td><code>02-岗位卡.md</code></td></tr>
+    <tr><td>单 Agent / ReAct / Plan and Execute</td><td>先选最小可行架构：直接交付、边做边观察，或先计划再执行。</td><td><code>02-岗位卡.md</code></td></tr>
     <tr><td>结构化输出</td><td>把输出写成固定字段、表头或检查清单。</td><td><code>03-输入输出样例/</code></td></tr>
   </tbody>
 </table>
@@ -77,7 +77,7 @@
 
 <div class="route-timeline">
   <article><strong>WEEK 09</strong><div><h3>只画 2–4 个角色的 Graph</h3><p>分开“找证据、做分析、汇总建议、最终批准”。每一个节点都有明确输入和输出；不要按部门名称拆 Agent。</p></div></article>
-  <article><strong>WEEK 10</strong><div><h3>只让必要的节点并行</h3><p>独立证据可以 Parallelization；需要统一判断时必须汇总。当工具数量开始影响角色清晰度时，先减少复杂度，而不是继续加 Agent。</p></div></article>
+  <article><strong>WEEK 10</strong><div><h3>只让必要的节点并行</h3><p>Multi-Agent 中，独立证据可以并行；需要统一判断时必须汇总。当工具数量开始影响角色清晰度时，先减少复杂度，而不是继续加 Agent。</p></div></article>
   <article><strong>WEEK 11</strong><div><h3>运行小批量项目</h3><p>选择一个有结束条件的项目，设置预算、周期和人工批准。课堂 TradingAgents 的 NVDA → 20 股扩展，就是“单个可复盘任务 → 有边界批量项目”的示例。</p></div></article>
   <article><strong>WEEK 12</strong><div><h3>提交项目立项或停止报告</h3><p>用事实向管理层说明：解决了什么、投入多少、质量怎样、哪些风险仍需人工承担，以及下一季度是否值得扩大预算。</p></div></article>
 </div>
@@ -85,9 +85,10 @@
 <table class="metric-table">
   <thead><tr><th>架构模式</th><th>什么时候才使用</th><th>不可省略的控制</th></tr></thead>
   <tbody>
-    <tr><td>Parallelization</td><td>多份证据互相独立，且等待成本高。</td><td>统一结果格式与汇总节点。</td></tr>
-    <tr><td>Orchestrator–Workers</td><td>任务步骤无法在开始时固定，且有清晰子任务边界。</td><td>任务上限、总预算、停止条件。</td></tr>
-    <tr><td>Multi-Agent Graph</td><td>一个角色无法同时承担证据、判断和批准。</td><td>节点输入输出、审计记录、最终人工责任。</td></tr>
+    <tr><td>Multi-Agent</td><td>一个角色无法同时承担证据、判断和批准，且多种专业视角可独立贡献。</td><td>角色输入输出、统一汇总与最终人工责任。</td></tr>
+    <tr><td>Route + Skill</td><td>不同类型项目或请求，需要不同的稳定方法与工具组合。</td><td>路由条件、Skill 边界与错误分流记录。</td></tr>
+    <tr><td>Blackboard</td><td>多个角色必须反复读取和更新共同的事实、假设与项目状态。</td><td>唯一事实板、数据新鲜度和写入权限。</td></tr>
+    <tr><td>Graph Workflow</td><td>流程要长期重复，且包含条件分支、重试和批准节点。</td><td>节点状态、停止条件、审计记录与人工批准。</td></tr>
   </tbody>
 </table>
 
@@ -113,9 +114,9 @@
 <table class="metric-table">
   <thead><tr><th>你现在的阶段</th><th>推荐主题</th><th>暂时不需要做</th></tr></thead>
   <tbody>
-    <tr><td>完成第一个岗位</td><td>Prompt Chaining、Routing、结构化输出、Token 与成本记录。</td><td>RAG、复杂框架、多 Agent 编排。</td></tr>
+    <tr><td>完成第一个岗位</td><td>单 Agent、ReAct、Plan and Execute、结构化输出、Token 与成本记录。</td><td>RAG、复杂框架、多 Agent 编排。</td></tr>
     <tr><td>开始 Harness 与 Loop</td><td>评测样本、Human in the Loop、Guardrails、追踪与失败复盘。</td><td>单元测试、CI/CD、生产部署。</td></tr>
-    <tr><td>准备团队项目</td><td>Parallelization、Orchestrator–Workers、MCP、权限边界、预算控制。</td><td>让多个 Agent 无限自主运行。</td></tr>
+    <tr><td>准备团队项目</td><td>Multi-Agent、Route + Skill、Blackboard、Graph Workflow、MCP、权限边界与预算控制。</td><td>让多个 Agent 无限自主运行。</td></tr>
   </tbody>
 </table>
 
