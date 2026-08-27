@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test": "node scripts/validate-harness-two-act.mjs",
     "dev": "vitepress dev docs --host 0.0.0.0",
     "build": "vitepress build docs",
     "preview": "vitepress preview docs --host 0.0.0.0"

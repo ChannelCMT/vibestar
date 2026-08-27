@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>两幕式 Harness 学员练习</title>
+  <style>
+    :root { --navy: #071426; --panel: #102a45; --blue: #37a7ff; --cyan: #69d8ff; --yellow: #ffd54a; --white: #f4f8fc; --slate: #8fa9c2; --red: #ff6b78; --green: #62d6a7; --radius: 22px; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: "Microsoft YaHei", sans-serif; background: radial-gradient(circle at top left, rgba(55, 167, 255, .18), transparent 30%), radial-gradient(circle at top right, rgba(255, 213, 74, .12), transparent 28%), linear-gradient(180deg, #091a2d, var(--navy)); color: var(--white); }
+    main { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 32px 0 56px; }
+    .hero, .act-panel { background: rgba(16, 42, 69, .9); border: 1px solid rgba(105, 216, 255, .18); border-radius: var(--radius); box-shadow: 0 20px 60px rgba(0, 0, 0, .25); }
+    .hero, .act-panel { padding: 28px; }
+    .eyebrow, .act-kicker { color: var(--cyan); font-size: 14px; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { font-size: clamp(30px, 6vw, 44px); margin: 10px 0 12px; }
+    h2, h3, p { margin-top: 0; }
+    .hero-copy, .footer-note { max-width: 780px; color: var(--slate); line-height: 1.7; }
+    .file-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .file-links a, button { border-radius: 999px; font: inherit; font-weight: 700; padding: 10px 15px; text-decoration: none; cursor: pointer; }
+    .file-links a, .copy-button, .secondary-button { color: var(--white); background: rgba(55, 167, 255, .18); border: 1px solid rgba(55, 167, 255, .34); }
+    .progress-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 24px 0; }
+    .progress-step { padding: 16px 18px; border: 1px solid rgba(143, 169, 194, .22); border-radius: 18px; background: rgba(7, 20, 38, .72); color: var(--slate); }
+    .progress-step strong { display: block; color: var(--white); font-size: 17px; margin-bottom: 4px; }
+    .progress-step.is-current { border-color: rgba(105, 216, 255, .4); color: var(--cyan); }
+    .progress-step.is-done, .progress-step.is-done strong { color: var(--green); }
+    .stack { display: grid; gap: 24px; }
+    .act-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
+    .act-kicker { display: inline-block; padding: 6px 12px; border-radius: 999px; background: rgba(55, 167, 255, .12); letter-spacing: 0; }
+    .act-body { display: grid; gap: 18px; }
+    .act-panel.locked { border-color: rgba(255, 107, 120, .35); }
+    .act-panel.locked .act-body { display: none; }
+    .lock-notice { display: none; padding: 18px; border: 1px dashed rgba(255, 213, 74, .4); border-radius: 18px; background: rgba(255, 213, 74, .08); color: var(--yellow); line-height: 1.6; }
+    .act-panel.locked .lock-notice { display: block; }
+    details, .mini-card, .callout { padding: 16px 18px; border: 1px solid rgba(143, 169, 194, .18); border-radius: 18px; background: rgba(7, 20, 38, .55); }
+    summary { cursor: pointer; font-weight: 700; }
+    table { width: 100%; margin-top: 14px; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid rgba(143, 169, 194, .16); text-align: left; vertical-align: top; }
+    th { color: var(--cyan); }
+    .definition-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .mini-card p, .callout p { margin-bottom: 0; color: var(--slate); line-height: 1.7; }
+    .callout.success { border-color: rgba(98, 214, 167, .35); background: rgba(98, 214, 167, .1); }
+    .callout.alert { border-color: rgba(255, 107, 120, .38); background: rgba(255, 107, 120, .12); }
+    .prompt-card { display: grid; gap: 12px; }
+    .prompt-actions { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: center; }
+    .prompt-actions p { max-width: 720px; margin: 0; color: var(--slate); line-height: 1.6; }
+    button { border: 0; transition: transform .2s ease; }
+    button:hover { transform: translateY(-1px); }
+    .primary-button { color: var(--navy); background: var(--yellow); }
+    pre { margin: 0; padding: 16px; overflow-x: auto; border: 1px solid rgba(105, 216, 255, .18); border-radius: 16px; background: rgba(7, 20, 38, .88); color: var(--white); white-space: pre-wrap; word-break: break-word; line-height: 1.75; }
+    @media (max-width: 760px) { main { width: min(100% - 20px, 1120px); padding-top: 20px; } .hero, .act-panel { padding: 18px; } .progress-row { grid-template-columns: 1fr; } .act-header, .prompt-actions { flex-direction: column; align-items: stretch; } }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">HARNESS MINI GAME · 5–8 MIN</p>
+      <h1>两幕式 Harness 学员离线练习</h1>
+      <p class="hero-copy">使用两份冻结的课堂 CSV，先建立基础经营规则，再在新质量证据出现后更新规则。所有结论都只是待人工批准的草稿，不执行付款、发布或其他外部操作。</p>
+      <nav class="file-links" aria-label="练习数据文件">
+        <a href="week1.csv">打开 week1.csv</a>
+        <a href="week1.csv" download>下载 week1.csv</a>
+        <a href="week2.csv">打开 week2.csv</a>
+        <a href="week2.csv" download>下载 week2.csv</a>
+      </nav>
+    </section>
+
+    <section class="progress-row" aria-label="练习进度">
+      <div class="progress-step is-current" id="progress-1"><strong>01 建立规则</strong><span>先用第一周数据形成草稿判断。</span></div>
+      <div class="progress-step" id="progress-2"><strong>02 新证据升级</strong><span>手动进入第二幕，加入质量门槛。</span></div>
+      <div class="progress-step" id="progress-3"><strong>03 完成复盘</strong><span>说明新规则为何改变结论。</span></div>
+    </section>
+
+    <div class="stack">
+      <section id="act-1" class="act-panel">
+        <div class="act-header">
+          <div><span class="act-kicker">Act 1</span><h2>第一幕：用基础规则检查第一周</h2><p class="hero-copy">只读取 <code>week1.csv</code>，建立经营说明与 Harness v1.0 规则，再形成第一周的草稿判断。</p></div>
+          <button id="complete-act-1" class="primary-button" type="button" onclick="completeActOne()">Codex已完成，进入第二幕</button>
+        </div>
+        <div class="act-body">
+          <details open><summary>查看 <code>week1.csv</code></summary><table aria-label="week1.csv"><thead><tr><th>week</th><th>ai_cost_yuan</th><th>hours_saved</th><th>data_completeness_pct</th><th>agent_rework_count</th><th>approval_status</th><th>bug_reopen_rate_pct</th></tr></thead><tbody><tr><td>2026-W1</td><td>6800</td><td>260</td><td>94</td><td>1</td><td>approved</td><td>9</td></tr></tbody></table></details>
+          <div class="definition-grid"><article class="mini-card"><h3>字段定义</h3><p><code>ai_cost_yuan</code> 是周度运营成本，<code>hours_saved</code> 是估算节省工时，不等于已实现收入。</p></article><article class="mini-card"><h3>数据质量</h3><p><code>data_completeness_pct</code> 反映报告完整度；<code>agent_rework_count</code> 是交付前因数据或验证问题触发的自动返工次数。</p></article><article class="mini-card"><h3>审批与风险</h3><p><code>approval_status</code> 是输入检查；Bug 重开率会在第二幕升级为硬门槛。</p></article></div>
+          <div class="callout success"><p>v1.0 规则：<code>ai_cost_yuan &lt;= 8000</code>、<code>data_completeness_pct &gt;= 90</code>、<code>agent_rework_count &lt;= 2</code>、<code>approval_status == approved</code>。</p></div>
+          <details class="prompt-card"><summary>展开 Prompt 1</summary><div class="prompt-actions"><p>先复制并在外部对话框中使用。只处理第一周数据。</p><button class="copy-button" type="button" onclick="copyPrompt('prompt-1', this)">复制 Prompt 1</button></div><pre id="prompt-1">你正在为50人小游戏公司“跃点互动”建立每周AI投入产出经营机制。
+
+请只读取 week1.csv，不要读取 week2.csv。
+
+完成以下任务：
+1. 创建 README.md，说明公司背景、CSV字段、经营目标和使用方法。
+2. 创建 AGENTS.md，版本标记为 Harness v1.0。
+3. 在 AGENTS.md 中写入以下规则：
+   - 每周AI费用不得超过8000元；
+   - 数据完整度不得低于90%；
+   - Agent自动返工次数不得超过2次；
+   - 最终经营建议必须经过人工审批；
+   - 证据不足时只能保存草稿，不能猜测结论；
+   - 不执行付款、发布或其他外部操作。
+4. 使用这些规则检查 week1.csv。
+
+完成后简要说明：创建了哪些文件、第一周是否通过、触发了哪些规则，以及当前还缺少哪些质量证据。</pre></details>
+        </div>
+      </section>
+
+      <section id="act-2" class="act-panel locked">
+        <div class="act-header"><div><span class="act-kicker">Act 2</span><h2>第二幕：新证据升级质量门槛</h2><p class="hero-copy">读取 <code>week2.csv</code>，保留基础门槛并新增质量风险规则，重新形成草稿判断。</p></div><button class="secondary-button" type="button" onclick="restartExercise()">重新开始练习</button></div>
+        <div class="lock-notice">第二幕初始锁定。完成第一幕后，点击“Codex已完成，进入第二幕”手动解锁。</div>
+        <div class="act-body">
+          <details><summary>查看 <code>week2.csv</code></summary><table aria-label="week2.csv"><thead><tr><th>week</th><th>ai_cost_yuan</th><th>hours_saved</th><th>data_completeness_pct</th><th>agent_rework_count</th><th>approval_status</th><th>bug_reopen_rate_pct</th></tr></thead><tbody><tr><td>2026-W2</td><td>7900</td><td>300</td><td>96</td><td>1</td><td>approved</td><td>18</td></tr></tbody></table></details>
+          <div class="callout alert"><p>质量风险升级：当 <code>bug_reopen_rate_pct &gt; 12%</code> 时，结论必须切换到 <code>paused_draft</code>，补充测试证据，并禁止建议扩大 AI 投入。</p></div>
+          <details class="prompt-card"><summary>展开 Prompt 2</summary><div class="prompt-actions"><p>先按旧规则检查第二周，再更新规则并重新检查。</p><button class="copy-button" type="button" onclick="copyPrompt('prompt-2', this)">复制 Prompt 2</button></div><pre id="prompt-2">现在读取 week2.csv、week1.csv 和现有 AGENTS.md。
+
+请严格按以下顺序执行：
+1. 保持 AGENTS.md v1.0 不变，用旧规则检查第二周数据。
+2. 对比两周数据，指出旧规则没有控制住的风险。
+3. 注意：Bug重开率从9%上升到18%。
+4. 将 AGENTS.md 更新为 Harness v1.1，新增质量闸门：
+   bug_reopen_rate_pct &gt; 12%
+   → 状态改为 paused_draft
+   → 要求补充测试证据
+   → 禁止建议扩大AI投入
+5. 展示规则从 v1.0 到 v1.1 的修改。
+6. 使用 v1.1 重新检查第二周数据。
+
+不要修改 CSV 和 README.md，也不要执行任何发布或外部操作。
+
+最后分别给出旧规则的判断、新增的控制规则，以及新规则的判断。</pre></details>
+          <p class="footer-note">复盘口径：基础门槛通过不等于可以直接扩大投入；当质量证据显示风险时，应暂停在待批准草稿并补充证据。</p>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script>
+    function setCopyButtonState(button, success) { button.textContent = success ? '已复制' : '复制失败，请手动选择'; }
+    function copyPrompt(targetId, button) {
+      var target = document.getElementById(targetId);
+      if (!target) { setCopyButtonState(button, false); return; }
+      var text = target.textContent;
+      if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(text).then(function () { setCopyButtonState(button, true); }, function () { setCopyButtonState(button, fallbackCopy(text)); }); return; }
+      setCopyButtonState(button, fallbackCopy(text));
+    }
+    function fallbackCopy(text) { var textarea = document.createElement('textarea'); textarea.value = text; textarea.setAttribute('readonly', ''); textarea.style.position = 'absolute'; textarea.style.left = '-9999px'; document.body.appendChild(textarea); textarea.select(); try { return document.execCommand('copy'); } catch (error) { return false; } finally { document.body.removeChild(textarea); } }
+    function completeActOne() { var actTwo = document.getElementById('act-2'); actTwo.classList.remove('locked'); document.getElementById('progress-1').classList.remove('is-current'); document.getElementById('progress-1').classList.add('is-done'); document.getElementById('progress-2').classList.add('is-current'); actTwo.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    function restartExercise() { var actTwo = document.getElementById('act-2'); actTwo.classList.add('locked'); document.getElementById('progress-1').classList.add('is-current'); document.getElementById('progress-1').classList.remove('is-done'); document.getElementById('progress-2').classList.remove('is-current'); document.getElementById('progress-3').classList.remove('is-current'); document.querySelectorAll('.copy-button').forEach(function (button) { button.textContent = button.getAttribute('onclick').includes('prompt-1') ? '复制 Prompt 1' : '复制 Prompt 2'; }); document.getElementById('act-1').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  </script>
+</body>
+</html>
