@@ -11,8 +11,8 @@
 
 <div class="decision-card">
   <span class="ops-label">STUDENT PRACTICE</span>
-  <h3>使用学生练习页完成两幕任务</h3>
-  <p><a href="/vibestar/harness-two-act/">打开两幕式 Harness 学生练习页</a>。页面提供 <code>week1.csv</code>、<code>week2.csv</code>、两份可复制 Prompt，以及由人工按钮推进的第二幕。</p>
+  <h3>在本页下方完成两幕任务</h3>
+  <p>继续阅读讲解与复盘，然后直接在页面底部使用 <code>week1.csv</code>、<code>week2.csv</code> 和两份 Prompt 完成练习。</p>
 </div>
 
 ## 演示合同
@@ -47,3 +47,14 @@
 ## 复盘
 
 第一幕通过基础门槛，不代表可以直接扩大 AI 投入。第二幕的质量风险提醒我们：Harness 的价值在于让系统在不确定时暂停、补证据、再交由人批准，而不是把经营决定自动化。
+
+## 学员实操：两幕式 Harness
+
+<iframe
+  src="/vibestar/harness-two-act/index.html"
+  title="两幕式 Harness 学员练习"
+  style="width: 100%; min-height: 1800px; border: 0; border-radius: 18px; background: #071426;"
+  loading="lazy"
+></iframe>
+
+如果内嵌区域受到浏览器限制，可以<a href="/vibestar/harness-two-act/index.html" target="_blank" rel="noopener">单独打开</a>。
