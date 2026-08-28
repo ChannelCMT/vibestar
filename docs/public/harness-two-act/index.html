@@ -10,7 +10,7 @@
     html { scroll-behavior: smooth; }
     body { margin: 0; font-family: "Microsoft YaHei", sans-serif; background: radial-gradient(circle at top left, rgba(55, 167, 255, .18), transparent 30%), radial-gradient(circle at top right, rgba(255, 213, 74, .12), transparent 28%), linear-gradient(180deg, #091a2d, var(--navy)); color: var(--white); }
     main { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 32px 0 56px; }
-    .hero, .act-panel { background: rgba(16, 42, 69, .9); border: 1px solid rgba(105, 216, 255, .18); border-radius: var(--radius); box-shadow: 0 20px 60px rgba(0, 0, 0, .25); }
+    .hero, .act-panel { min-width: 0; background: rgba(16, 42, 69, .9); border: 1px solid rgba(105, 216, 255, .18); border-radius: var(--radius); box-shadow: 0 20px 60px rgba(0, 0, 0, .25); }
     .hero, .act-panel { padding: 28px; }
     .eyebrow, .act-kicker { color: var(--cyan); font-size: 14px; letter-spacing: .14em; text-transform: uppercase; }
     h1 { font-size: clamp(30px, 6vw, 44px); margin: 10px 0 12px; }
@@ -27,18 +27,19 @@
     .stack { display: grid; gap: 24px; }
     .act-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
     .act-kicker { display: inline-block; padding: 6px 12px; border-radius: 999px; background: rgba(55, 167, 255, .12); letter-spacing: 0; }
-    .act-body { display: grid; gap: 18px; }
+    .act-body { display: grid; min-width: 0; gap: 18px; }
     .act-panel.locked { border-color: rgba(255, 107, 120, .35); }
     .act-panel.locked .act-body { display: none; }
     .lock-notice { display: none; padding: 18px; border: 1px dashed rgba(255, 213, 74, .4); border-radius: 18px; background: rgba(255, 213, 74, .08); color: var(--yellow); line-height: 1.6; }
     .act-panel.locked .lock-notice { display: block; }
-    details, .mini-card, .callout { padding: 16px 18px; border: 1px solid rgba(143, 169, 194, .18); border-radius: 18px; background: rgba(7, 20, 38, .55); }
+    details, .mini-card, .callout { min-width: 0; padding: 16px 18px; border: 1px solid rgba(143, 169, 194, .18); border-radius: 18px; background: rgba(7, 20, 38, .55); }
     summary { cursor: pointer; font-weight: 700; }
     table { width: 100%; margin-top: 14px; border-collapse: collapse; font-size: 14px; }
     th, td { padding: 10px 12px; border-bottom: 1px solid rgba(143, 169, 194, .16); text-align: left; vertical-align: top; }
     th { color: var(--cyan); }
     .definition-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
     .mini-card p, .callout p { margin-bottom: 0; color: var(--slate); line-height: 1.7; }
+    .mini-card code, .callout code, .hero-copy code { white-space: normal; overflow-wrap: anywhere; word-break: break-word; }
     .callout.success { border-color: rgba(98, 214, 167, .35); background: rgba(98, 214, 167, .1); }
     .callout.alert { border-color: rgba(255, 107, 120, .38); background: rgba(255, 107, 120, .12); }
     .prompt-card { display: grid; gap: 12px; }
@@ -48,7 +49,18 @@
     button:hover { transform: translateY(-1px); }
     .primary-button { color: var(--navy); background: var(--yellow); }
     pre { margin: 0; padding: 16px; overflow-x: auto; border: 1px solid rgba(105, 216, 255, .18); border-radius: 16px; background: rgba(7, 20, 38, .88); color: var(--white); white-space: pre-wrap; word-break: break-word; line-height: 1.75; }
-    @media (max-width: 760px) { main { width: min(100% - 20px, 1120px); padding-top: 20px; } .hero, .act-panel { padding: 18px; } .progress-row { grid-template-columns: 1fr; } .act-header, .prompt-actions { flex-direction: column; align-items: stretch; } }
+    @media (max-width: 760px) {
+      main { width: min(100% - 20px, 1120px); padding-top: 20px; }
+      .hero, .act-panel { padding: 18px; }
+      .progress-row, .definition-grid { grid-template-columns: 1fr; }
+      .act-header, .prompt-actions { flex-direction: column; align-items: stretch; }
+      table, tbody, tr, td { display: block; width: 100%; }
+      table { margin-top: 12px; }
+      thead { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+      tbody tr { display: grid; gap: 0; }
+      td { display: grid; grid-template-columns: minmax(118px, 42%) minmax(0, 1fr); gap: 12px; padding: 10px 0; overflow-wrap: anywhere; }
+      td::before { content: attr(data-label); color: var(--cyan); font-weight: 700; overflow-wrap: anywhere; }
+    }
   </style>
 </head>
 <body>
@@ -78,7 +90,7 @@
           <button id="complete-act-1" class="primary-button" type="button" onclick="completeActOne()">Codex已完成，进入第二幕</button>
         </div>
         <div class="act-body">
-          <details open><summary>查看 <code>week1.csv</code></summary><table aria-label="week1.csv"><thead><tr><th>week</th><th>ai_cost_yuan</th><th>hours_saved</th><th>data_completeness_pct</th><th>agent_rework_count</th><th>approval_status</th><th>bug_reopen_rate_pct</th></tr></thead><tbody><tr><td>2026-W1</td><td>6800</td><td>260</td><td>94</td><td>1</td><td>approved</td><td>9</td></tr></tbody></table></details>
+          <details open><summary>查看 <code>week1.csv</code></summary><table aria-label="week1.csv"><thead><tr><th>week</th><th>ai_cost_yuan</th><th>hours_saved</th><th>data_completeness_pct</th><th>agent_rework_count</th><th>approval_status</th><th>bug_reopen_rate_pct</th></tr></thead><tbody><tr><td data-label="week">2026-W1</td><td data-label="ai_cost_yuan">6800</td><td data-label="hours_saved">260</td><td data-label="data_completeness_pct">94</td><td data-label="agent_rework_count">1</td><td data-label="approval_status">approved</td><td data-label="bug_reopen_rate_pct">9</td></tr></tbody></table></details>
           <div class="definition-grid"><article class="mini-card"><h3>字段定义</h3><p><code>ai_cost_yuan</code> 是周度运营成本，<code>hours_saved</code> 是估算节省工时，不等于已实现收入。</p></article><article class="mini-card"><h3>数据质量</h3><p><code>data_completeness_pct</code> 反映报告完整度；<code>agent_rework_count</code> 是交付前因数据或验证问题触发的自动返工次数。</p></article><article class="mini-card"><h3>审批与风险</h3><p><code>approval_status</code> 是输入检查；Bug 重开率会在第二幕升级为硬门槛。</p></article></div>
           <div class="callout success"><p>v1.0 规则：<code>ai_cost_yuan &lt;= 8000</code>、<code>data_completeness_pct &gt;= 90</code>、<code>agent_rework_count &lt;= 2</code>、<code>approval_status == approved</code>。</p></div>
           <details class="prompt-card"><summary>展开 Prompt 1</summary><div class="prompt-actions"><p>先复制并在外部对话框中使用。只处理第一周数据。</p><button class="copy-button" type="button" onclick="copyPrompt('prompt-1', this)">复制 Prompt 1</button></div><pre id="prompt-1">你正在为50人小游戏公司“跃点互动”建立每周AI投入产出经营机制。
@@ -105,7 +117,7 @@
         <div class="act-header"><div><span class="act-kicker">Act 2</span><h2>第二幕：新证据升级质量门槛</h2><p class="hero-copy">读取 <code>week2.csv</code>，保留基础门槛并新增质量风险规则，重新形成草稿判断。</p></div><button class="secondary-button" type="button" onclick="restartExercise()">重新开始练习</button></div>
         <div class="lock-notice">第二幕初始锁定。完成第一幕后，点击“Codex已完成，进入第二幕”手动解锁。</div>
         <div class="act-body">
-          <details><summary>查看 <code>week2.csv</code></summary><table aria-label="week2.csv"><thead><tr><th>week</th><th>ai_cost_yuan</th><th>hours_saved</th><th>data_completeness_pct</th><th>agent_rework_count</th><th>approval_status</th><th>bug_reopen_rate_pct</th></tr></thead><tbody><tr><td>2026-W2</td><td>7900</td><td>300</td><td>96</td><td>1</td><td>approved</td><td>18</td></tr></tbody></table></details>
+          <details><summary>查看 <code>week2.csv</code></summary><table aria-label="week2.csv"><thead><tr><th>week</th><th>ai_cost_yuan</th><th>hours_saved</th><th>data_completeness_pct</th><th>agent_rework_count</th><th>approval_status</th><th>bug_reopen_rate_pct</th></tr></thead><tbody><tr><td data-label="week">2026-W2</td><td data-label="ai_cost_yuan">7900</td><td data-label="hours_saved">300</td><td data-label="data_completeness_pct">96</td><td data-label="agent_rework_count">1</td><td data-label="approval_status">approved</td><td data-label="bug_reopen_rate_pct">18</td></tr></tbody></table></details>
           <div class="callout alert"><p>质量风险升级：当 <code>bug_reopen_rate_pct &gt; 12%</code> 时，结论必须切换到 <code>paused_draft</code>，补充测试证据，并禁止建议扩大 AI 投入。</p></div>
           <details class="prompt-card"><summary>展开 Prompt 2</summary><div class="prompt-actions"><p>先按旧规则检查第二周，再更新规则并重新检查。</p><button class="copy-button" type="button" onclick="copyPrompt('prompt-2', this)">复制 Prompt 2</button></div><pre id="prompt-2">现在读取 week2.csv、week1.csv 和现有 AGENTS.md。
 
